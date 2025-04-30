@@ -1,0 +1,70 @@
+{
+  "name": "web",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/web/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/web",
+        "configFile": "apps/web/vite.config.ts"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "buildTarget": "web:build",
+        "open": true
+      }
+    },
+    "electron": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx serve web"
+        ],
+        "parallel": false
+      },
+      "configurations": {
+        "build": {
+          "commands": [
+            "nx build web",
+            "electron-builder"
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/web/**/*.{ts,js,tsx,jsx,vue}"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/apps/web"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/web"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+          "options": {
+          "commands": [
+              {
+                  "command": "vue-tsc --noEmit -p tsconfig.json"
+              }
+          ],
+          "cwd": "apps/web"
+      }
+    }
+  }
+}

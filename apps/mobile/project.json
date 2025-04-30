@@ -1,0 +1,143 @@
+{
+    "name": "mobile",
+    "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/mobile/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nx/vite:build",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/mobile",
+                "configFile": "apps/mobile/vite.config.ts"
+            },
+            "configurations": {
+              "production": {}
+            }
+        },
+        "serve": {
+          "executor": "@nx/vite:dev-server",
+          "options": {
+            "buildTarget": "mobile:build",
+            "open": true
+          }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/mobile/**/*.{ts,js,tsx,jsx,vue}"],
+                "fix": true
+            }
+        },
+        "test": {
+          "executor": "@nx/vite:test",
+          "outputs": ["coverage/apps/mobile"],
+          "options": {
+            "passWithNoTests": true,
+            "reportsDirectory": "../../coverage/apps/mobile"
+          }
+        },
+        "typecheck": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    {
+                        "command": "vue-tsc --noEmit -p tsconfig.json"
+                    }
+                ],
+                "cwd": "apps/mobile"
+            }
+        },
+        "cap": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "--help"
+            }
+        },
+        "add": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "add"
+            },
+            "configurations": {
+                "ios": {
+                    "cmd": "add ios"
+                },
+                "android": {
+                    "cmd": "add android"
+                }
+            }
+        },
+        "copy": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "copy"
+            },
+            "configurations": {
+                "ios": {
+                    "cmd": "copy ios"
+                },
+                "android": {
+                    "cmd": "copy android"
+                }
+            }
+        },
+        "open": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "open"
+            },
+            "configurations": {
+                "ios": {
+                    "cmd": "open ios"
+                },
+                "android": {
+                    "cmd": "open android"
+                }
+            }
+        },
+        "run": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "run"
+            },
+            "configurations": {
+                "ios": {
+                    "cmd": "run ios"
+                },
+                "android": {
+                    "cmd": "run android"
+                }
+            }
+        },
+        "sync": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "sync"
+            },
+            "configurations": {
+                "ios": {
+                    "cmd": "sync ios"
+                },
+                "android": {
+                    "cmd": "sync android"
+                }
+            }
+        },
+        "update": {
+            "executor": "@nxext/capacitor:cap",
+            "options": {
+                "cmd": "update"
+            },
+            "configurations": {
+                "ios": {
+                    "cmd": "update ios"
+                },
+                "android": {
+                    "cmd": "update android"
+                }
+            }
+        }
+    }
+}
