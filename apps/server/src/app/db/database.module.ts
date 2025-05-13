@@ -3,8 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Session } from './session.entity';
 import { User } from './user.entity';
+import { Booking } from './booking.entity';
 
-const entities: unknown[] = [User, Session];
+const entities: unknown[] = [User, Session, Booking];
 
 @Module({
     imports: [

@@ -14,6 +14,18 @@ export interface UsePromiseStateRetrun<TResult, TError, TPayload> {
     execute: (delay?: number, payload?: TPayload) => Promise<TResult>;
 }
 
+/**
+ * 创建一个响应式状态管理钩子，用于处理 Promise 的执行和状态跟踪。
+ *
+ * @typeParam TResult - Promise 成功时返回的结果类型。
+ * @typeParam TError - Promise 失败时抛出的错误类型，默认为 `unknown`。
+ * @typeParam TPayload - 传递给 Promise 函数的负载参数类型，默认为 `any`。
+ *
+ * @param promise - 一个返回 Promise 的函数，接收可选的负载参数 `payload`。
+ * @param onError - 一个可选的错误处理函数，当 Promise 执行失败时调用。
+ *
+ * @returns 一个包含 Promise 执行状态和控制方法的对象。
+ */
 export function usePromiseState<TResult, TError = unknown, TPayload = any>(
     promise: (payload?: any) => Promise<TResult>,
     onError?: (e: TError) => void

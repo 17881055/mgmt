@@ -34,6 +34,19 @@
                 </q-item>
 
                 <q-item
+                    v-if="userHasPermission('booking')"
+                    :active="route.name === 'booking'"
+                    clickable
+                    @click="router.push({ name: 'booking' })"
+                >
+                    <q-item-section avatar>
+                        <q-icon name="mdi-book-account" />
+                    </q-item-section>
+
+                    <q-item-section>{{ routeTitle('booking') }}</q-item-section>
+                </q-item>
+
+                <q-item
                     v-if="userHasPermission('users')"
                     :active="route.name === 'users'"
                     clickable

@@ -34,6 +34,28 @@ export const routes: RouteRecordRaw[] = [
                 },
             },
             {
+                path: '/booking',
+                component: () => import('@/app/pages/booking/index.vue'),
+                children: [
+                    {
+                        path: 'list',
+                        name: 'booking',
+                        component: () => import('@/app/pages/booking/list.vue'),
+                        meta: {
+                            auth: AuthMeta.Required,
+                        },
+                    },
+                    // {
+                    //     path: ':id',
+                    //     name: 'booking',
+                    //     component: () => import('@/app/pages/booking/detail.vue'),
+                    //     meta: {
+                    //         auth: AuthMeta.Required,
+                    //     },
+                    // },
+                ],
+            },
+            {
                 path: '/users',
                 component: () => import('@/app/pages/users/index.vue'),
                 children: [
